@@ -8,9 +8,9 @@ function PasswordChecker(wrapperId, passwordInputFieldId, passwordSubmitButtonId
     this.minLength = 8; //this is what we defined and what we need to consider in our length check
 
     //this attributes are set with our constructor
-    this.wrapperField = $(wrapperId);
-    this.passwordField = $(passwordInputFieldId);
-    this.passwordSubmitButton = $(passwordSubmitButtonId);
+    this.wrapperField = $(wrapperId); //1. Zeile
+    this.passwordField = $(passwordInputFieldId); //2. Zeile
+    this.passwordSubmitButton = $(passwordSubmitButtonId); //3. Zeile
 
 
     var that = this; //a trick because this is a keyword and means different things in a new context! Especially when you work with events or if you call functions outside your class "this" won't mean you!
@@ -26,19 +26,19 @@ function PasswordChecker(wrapperId, passwordInputFieldId, passwordSubmitButtonId
         //onblur is an event which happens in "passwordField" -> so the keyword "this" would refer to the passwordField NOT to our class
         //therefore we previously saved "this" in a variable called "that"
         that.check();
-    });
+    }); //4. Zeile
 
     this.passwordField.keydown(function() {
         that.check();
-    });
+    }); //5. Zeile
 
     this.passwordField.focus(function() {
         that.check();
-    });
+    }); //6. Zeile
 
     this.passwordSubmitButton.click(function() {
         that.check();
-    });
+    }); //7. Zeile
 
 
 
@@ -46,19 +46,20 @@ function PasswordChecker(wrapperId, passwordInputFieldId, passwordSubmitButtonId
         //we can only check if every field which with given Id exists
         //one of them would be null if one Id wouldn't exist therefore following statement would fail
         if(this.wrapperField && this.passwordField && this.passwordSubmitButton) {
+
             var longEnough = this.checkForLength();
             var hasSpecialChars = this.checkForSpecialCharacters();
 
             //if it is long enough and has a special character - everything is fine
             if(longEnough && hasSpecialChars) {
                 this.wrapperField.removeClass(this.warningClass + ' ' + this.errorClass).addClass(this.successClass);
-                this.passwordSubmitButton.attr('disabled', false);
+                this.passwordSubmitButton.attr('disabled', false); // 8. Zeile
             } else if(!hasSpecialChars && longEnough) { //if it is long enough but it has no special character set class warning
                 this.wrapperField.removeClass(this.successClass + ' ' + this.errorClass).addClass(this.warningClass);
-                this.passwordSubmitButton.attr('disabled', true);
+                this.passwordSubmitButton.attr('disabled', true); // 9. Zeile anders
             } else { //if it is not long enough set class error
                 this.wrapperField.removeClass(this.warningClass + ' ' + this.successClass).addClass(this.errorClass);
-                this.passwordSubmitButton.attr('disabled', true);
+                this.passwordSubmitButton.attr('disabled', true); //10. Zeile anders
             }
 
 
