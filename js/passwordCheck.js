@@ -66,10 +66,12 @@ function PasswordChecker(wrapperId, passwordInputFieldId, passwordSubmitButtonId
     /*
     This method should return true if the length of passwordField value is greater or equal to this.minLength
      */
+    var password = document.getElementById(password);
+
     this.checkForLength = function () {
         //@todo
         //have a look at javascript string methods and properties
-        return passwordInputFieldId.value.length >= this.minLength;
+        return password.value.length >= this.minLength;
 
     };
 
@@ -80,7 +82,7 @@ function PasswordChecker(wrapperId, passwordInputFieldId, passwordSubmitButtonId
         //@todo
         //have a look at javascript string methods and properties
         //you could probably "match" it somehow
-        return !!(passwordInputFieldId.value.contains("!") || ("&") || ("%") || ("§") || ("=") || ("$") || ("(") || (")") || ("/"));
+        return !!(password.value.contains("!") || ("&") || ("%") || ("§") || ("=") || ("$") || ("(") || (")") || ("/"));
 
     };
 }
